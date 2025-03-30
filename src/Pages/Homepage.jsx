@@ -1,47 +1,51 @@
 import RecipeCard from "../components/RecipeCard.jsx";
-import {FormGroup, Grid, TextField} from "@mui/material";
+import {Box, FormGroup, Grid, TextField} from "@mui/material";
 import BasePageLayout from "../BasePageLayout.jsx";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
+import {useState} from "react";
 import Button from "@mui/material/Button";
+import TheMeanDBClient from "../Clients/TheMeanDBClient.js";
 
 
 const Homepage = () => {
+    const [userSearchedRecipes, setUserSearchedRecipes] = useState([])
 
-    const handleFindRecipeByName = (e) => {
+    const handleFindRecipeByName = async (e) => {
         e.preventDefault();
-        alert("sent")
+        const data = Object.fromEntries(new FormData(e.target))
+        const foundRecipes = await TheMeanDBClient.searchRecipesByName(data.userFilter)
+        setUserSearchedRecipes(foundRecipes)
     }
 
     return (
         <BasePageLayout>
             <Typography variant="h2">Welcome</Typography>
             <Typography variant="h6">&nbsp;</Typography>
-            <form onSubmit={handleFindRecipeByName} >
-                <FormGroup row>
-                    <TextField sx={{ width: 1/3 }} id="outlined-basic" label="Find a recipe by name" variant="outlined" size="small" />
-                    <Button type="submit" variant="contained" size="medium" disableElevation>Find recipe</Button>
-                </FormGroup>
-            </form>
-            <Grid container spacing={2} my={2}>
-                <Grid>
-                    <RecipeCard isFavourite={false}/>
-                </Grid>
-                <Grid>
-                    <RecipeCard isFavourite={false}/>
-                </Grid>
-                <Grid>
-                    <RecipeCard isFavourite={false}/>
-                </Grid>
-                <Grid>
-                    <RecipeCard isFavourite={false}/>
-                </Grid>
-                <Grid>
-                    <RecipeCard isFavourite={false}/>
-                </Grid>
-                <Grid>
-                    <RecipeCard isFavourite={false}/>
-                </Grid>
+            <Box sx={{ mb: 6 }}>
+                <form onSubmit={handleFindRecipeByName}>
+                    <FormGroup row>
+                        <TextField sx={{width: 1 / 3}} id="outlined-basic" label="Find a recipe by name" variant="outlined"
+                                   size="small" name="userFilter"/>
+                        <Button type="submit" variant="contained" size="medium" disableElevation>Find recipe</Button>
+                    </FormGroup>
+                </form>
+            </Box>
+            <Grid container spacing={2} my={2} gap={4}>
+                {
+                    userSearchedRecipes.map((recipe, index) =>
+                        <Grid key={index}>
+                            <RecipeCard
+                                key={index}
+                                id={recipe.idMeal}
+                                name={recipe.strMeal}
+                                image={recipe.strMealThumb}
+                                category={recipe.strCategory}
+                                area={recipe.strArea}
+                                isFavourite={false}/>
+                        </Grid>
+                    )
+                }
             </Grid>
         </BasePageLayout>
     )

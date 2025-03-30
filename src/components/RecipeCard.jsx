@@ -8,30 +8,29 @@ import Typography from '@mui/material/Typography';
 import {Link, useNavigate} from "react-router-dom";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import {Chip} from "@mui/material";
 
-const RecipeCard = ({isFavourite}) => {
+const RecipeCard = ({id, name, image, category, area, isFavourite}) => {
     const navigate = useNavigate()
 
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ minWidth: 345, maxWidth: 345 }}>
             <CardMedia
                 component="img"
                 alt="green iguana"
-                height="140"
-                image="http://mui.com/static/images/cards/contemplative-reptile.jpg"
+                height="280"
+                image={image}
             />
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                    Lizard
+                    {name}
                 </Typography>
-                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                    species, ranging across all continents except Antarctica
-                </Typography>
+                <Chip label={category} sx={{ mr: 0.5 }} />
+                <Chip label={area} sx={{ mr: 0.5 }}/>
             </CardContent>
             <CardActions>
                 <Button size="small">{isFavourite ? <FavoriteIcon /> : <FavoriteBorderIcon /> }</Button>
-                <Button size="small" onClick={() => navigate("/recipe/1")}>Recipe</Button>
+                <Button size="small" onClick={() => navigate(`/recipe/${id}`)}>Recipe</Button>
             </CardActions>
         </Card>
     );
