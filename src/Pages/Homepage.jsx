@@ -1,14 +1,15 @@
 import RecipeCard from "../components/RecipeCard.jsx";
 import {Grid} from "@mui/material";
+import BasePageLayout from "../BasePageLayout.jsx";
 
 
-const Homepage = () => { // Save in pages/Homepage.jsx
+const Homepage = () => {
     return (
-        <div className="Homepage">
+        <BasePageLayout>
             <h1>Welcome</h1>
+            <h3>Choose a recipe</h3>
             <Grid container spacing={2} my={2}>
-                {/* Inner Grids (columns) are items */}
-                <Grid> {/* use 4/12 columns on xs screens up */}
+                <Grid>
                     <RecipeCard/>
                 </Grid>
                 <Grid>
@@ -27,7 +28,7 @@ const Homepage = () => { // Save in pages/Homepage.jsx
                     <RecipeCard/>
                 </Grid>
             </Grid>
-        </div>
+        </BasePageLayout>
     )
 }
 

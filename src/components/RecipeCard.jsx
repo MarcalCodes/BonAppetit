@@ -7,8 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from "react-router-dom";
 
-
-const ImgMediaCard = () => {
+const RecipeCard = () => {
     return (
         <Card sx={{ maxWidth: 345 }}>
             <CardMedia
@@ -34,4 +33,4 @@ const ImgMediaCard = () => {
     );
 }
 
-export default ImgMediaCard;
+export default RecipeCard;

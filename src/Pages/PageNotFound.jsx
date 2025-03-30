@@ -4,9 +4,9 @@ const PageNotFound = () => {
     return (
         <div className="PageNotFound">
             <h1>Page Not Found</h1>
-            <p>What were you looking for?
-                Maybe going back <Link to="/">home</Link>
-                will help you find it.</p>
+            <p>What were you looking for?</p>
+            <p>Maybe going back <Link to="/">home</Link></p>
+            <p>will help you find it.</p>
         </div>
     )
 }
