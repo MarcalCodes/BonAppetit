@@ -7,8 +7,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {Link, useNavigate} from "react-router-dom";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
-const RecipeCard = () => {
+const RecipeCard = ({isFavourite}) => {
     const navigate = useNavigate()
 
     return (
@@ -29,7 +30,7 @@ const RecipeCard = () => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small"><FavoriteBorderIcon /></Button>
+                <Button size="small">{isFavourite ? <FavoriteIcon /> : <FavoriteBorderIcon /> }</Button>
                 <Button size="small" onClick={() => navigate("/recipe/1")}>Recipe</Button>
             </CardActions>
         </Card>

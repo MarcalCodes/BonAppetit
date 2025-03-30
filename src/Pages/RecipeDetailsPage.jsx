@@ -13,7 +13,7 @@ const RecipeDetailsPage = () => {
         <BasePageLayout>
             <Grid container spacing={2} my={2}>
                 <Grid size={8}>
-                    <Typography align="center" variant="h2">Recipe #{recipeId}</Typography>
+                    <Typography align="center" variant="h2">Lizard chops</Typography>
                 </Grid>
                 <Grid size={4}>
                     <CardMedia
