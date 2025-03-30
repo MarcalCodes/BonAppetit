@@ -5,9 +5,12 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 const RecipeCard = () => {
+    const navigate = useNavigate()
+
     return (
         <Card sx={{ maxWidth: 345 }}>
             <CardMedia
@@ -26,8 +29,8 @@ const RecipeCard = () => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small">❤️</Button>
-                <Link size="small" to="/recipe/1">Recipe</Link>
+                <Button size="small"><FavoriteBorderIcon /></Button>
+                <Button size="small" onClick={() => navigate("/recipe/1")}>Recipe</Button>
             </CardActions>
         </Card>
     );
