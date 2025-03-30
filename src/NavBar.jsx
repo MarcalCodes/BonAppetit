@@ -63,6 +63,7 @@ const NavBar = () => {
                         variant="h6"
                         component="div"
                         sx={{flexGrow: 1, display: {xs: 'none', sm: 'block'}}}
+                        onClick={() => navigate("/")} /* Allows to return to the home page when app title is clicked */
                     >
                         Bon Appetit
                     </Typography>
