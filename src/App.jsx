@@ -1,11 +1,13 @@
 import AppRoutes from "./Routes/AppRoutes.jsx";
 import {UserProvider} from "./Context/userContext.jsx";
+import {useState} from "react";
 
 function App() {
+    const [userSearchedRecipes, setUserSearchedRecipes] = useState(undefined)
 
     return (
         <UserProvider>
-            <AppRoutes/>
+            <AppRoutes recipes={userSearchedRecipes} setRecipes={setUserSearchedRecipes}/>
         </UserProvider>
     )
 }

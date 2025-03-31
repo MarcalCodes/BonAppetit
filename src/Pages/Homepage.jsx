@@ -8,14 +8,13 @@ import Button from "@mui/material/Button";
 import TheMealDBClient from "../Clients/TheMealDBClient.js";
 
 
-const Homepage = () => {
-    const [userSearchedRecipes, setUserSearchedRecipes] = useState(undefined)
+const Homepage = ({recipes, setRecipes}) => {
 
     const handleFindRecipeByName = async (e) => {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(e.target))
         const foundRecipes = await TheMealDBClient.searchRecipesByName(data.userFilter)
-        setUserSearchedRecipes(foundRecipes)
+        setRecipes(foundRecipes)
     }
 
     return (
@@ -34,11 +33,11 @@ const Homepage = () => {
             </Box>
             <Grid container spacing={2} my={2} gap={4}>
                 {
-                    userSearchedRecipes === undefined
+                    recipes === undefined
                         ? <Box/> // user just arrived on the page and didn't search yet for anything
-                        : userSearchedRecipes.length === 0
+                        : recipes.length === 0
                             ? <Typography>No Recipe found</Typography>
-                            : userSearchedRecipes.map((recipe, index) =>
+                            : recipes.map((recipe, index) =>
                                 <Grid key={index}>
                                     <RecipeCard
                                         key={index}
