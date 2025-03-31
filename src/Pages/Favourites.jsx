@@ -12,9 +12,10 @@ const Favourites = ({favourites, addFavourite, removeFavourite}) => {
             <Typography variant="h6">&nbsp;</Typography>
             <RecipeGrid>
                 {
-                    favourites.map(favouriteRecipe =>
-                        <Grid>
+                    favourites.map((favouriteRecipe, index) =>
+                        <Grid key={index}>
                             <RecipeCard
+                                key={index}
                                 recipe={favouriteRecipe}
                                 isFavourite={true}
                                 addFavourite={addFavourite}
