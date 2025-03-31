@@ -1,6 +1,7 @@
 import AppRoutes from "./Routes/AppRoutes.jsx";
 import {UserProvider} from "./Context/userContext.jsx";
 import {useState} from "react";
+import {CssBaseline} from "@mui/material";
 
 const App = () => {
     const [userSearchedRecipes, setUserSearchedRecipes] = useState(undefined)
@@ -20,6 +21,7 @@ const App = () => {
 
     return (
         <UserProvider>
+            <CssBaseline />
             <AppRoutes
                 recipes={userSearchedRecipes}
                 setRecipes={setUserSearchedRecipes}
