@@ -3,9 +3,9 @@ import {Box, FormGroup, Grid, TextField} from "@mui/material";
 import BasePageLayout from "../components/BasePageLayout.jsx";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
-import {useState} from "react";
 import Button from "@mui/material/Button";
 import {searchRecipesByName} from "../api/TheMealDbApi.js";
+import RecipeGrid from "../components/RecipeGrid.jsx";
 
 
 const Homepage = ({recipes, setRecipes, isFavourite, addFavourite, removeFavourite}) => {
@@ -31,7 +31,7 @@ const Homepage = ({recipes, setRecipes, isFavourite, addFavourite, removeFavouri
                     </FormGroup>
                 </form>
             </Box>
-            <Grid container spacing={2} my={2} gap={4}>
+            <RecipeGrid>
                 {
                     recipes === undefined
                         ? <Box/> // user just arrived on the page and didn't search yet for anything
@@ -49,7 +49,7 @@ const Homepage = ({recipes, setRecipes, isFavourite, addFavourite, removeFavouri
                                 </Grid>
                             )
                 }
-            </Grid>
+            </RecipeGrid>
         </BasePageLayout>
     )
 }
