@@ -1,68 +1,99 @@
 import {useParams} from "react-router-dom";
-import {Grid} from "@mui/material";
+import {CircularProgress, Grid, ListItem, ListItemText} from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
 import * as React from "react";
-import BasePageLayout from "../BasePageLayout.jsx";
+import {useEffect, useState} from "react";
+import BasePageLayout from "../components/BasePageLayout.jsx";
 import Typography from "@mui/material/Typography";
+import TheMealDBClient from "../Clients/TheMeanDBClient.js";
+import List from '@mui/material/List';
 
 const RecipeDetailsPage = () => {
+    const [currentRecipe, setCurrentRecipe] = useState(undefined)
+
     const params = useParams();
     const recipeId = params.recipeId
 
-    return (
-        <BasePageLayout>
+    useEffect(() => {
+        TheMealDBClient
+            .findRecipeById(recipeId)
+            .then(recipe => setCurrentRecipe(recipe))
+    }, [recipeId])
+
+    const ingredients = () => {
+        return [
+            currentRecipe.strIngredient1,
+            currentRecipe.strIngredient2,
+            currentRecipe.strIngredient3,
+            currentRecipe.strIngredient4,
+            currentRecipe.strIngredient5,
+            currentRecipe.strIngredient6,
+            currentRecipe.strIngredient7,
+            currentRecipe.strIngredient8,
+            currentRecipe.strIngredient9,
+            currentRecipe.strIngredient10,
+            currentRecipe.strIngredient11,
+            currentRecipe.strIngredient12,
+            currentRecipe.strIngredient13,
+            currentRecipe.strIngredient14,
+            currentRecipe.strIngredient15,
+            currentRecipe.strIngredient16,
+            currentRecipe.strIngredient17,
+            currentRecipe.strIngredient18,
+            currentRecipe.strIngredient19,
+            currentRecipe.strIngredient20,
+        ].filter(ing => ing !== undefined && ing !== null && ing !== "")
+    }
+
+    const showPageContent = () => {
+        return (
             <Grid container spacing={2} my={2}>
-                <Grid size={8}>
-                    <Typography align="center" variant="h2">Lizard chops</Typography>
+                <Grid size={12}>
+                    <Typography variant="h2">{currentRecipe.strMeal}</Typography>
                 </Grid>
-                <Grid size={4}>
+                <Grid size={12}>
                     <CardMedia
                         component="img"
-                        alt="green iguana"
-                        height="140"
-                        image="http://mui.com/static/images/cards/contemplative-reptile.jpg"
+                        alt="recipe image"
+                        height="350"
+                        sx={{maxWidth: 'md'}}
+                        image={currentRecipe.strMealThumb}
                     />
                 </Grid>
                 <Grid size={12}>
-                    <Typography variant="h5">Ingredients</Typography> {/* TODO Ingrid: Put that alongside the ingredient list  */}
+                    <Typography
+                        variant="h5">Ingredients</Typography> {/* TODO: Put that alongside the ingredient list  */}
                 </Grid>
                 <Grid container size={12}>
-                    <Grid size={6}>
-                        <ul>
-                            <li>Pork</li>
-                            <li>Chicken</li>
-                            <li>Butter</li>
-                        </ul>
-                    </Grid>
-                    <Grid size={6}>
-                        <ul>
-                            <li>Beef</li>
-                            <li>Duck</li>
-                            <li>Oil</li>
-                        </ul>
-                    </Grid>
+                    <List
+                        dense={true}
+                        // CSS comes from https://stackoverflow.com/a/69369691/29476271
+                        sx={{
+                        display: "flex",
+                        flexFlow: "column wrap",
+                        height: 300, // set the height limit to your liking
+                        width: '50%',
+                    }}>
+                        {ingredients().map(ingredient =>
+                            <ListItem>
+                                <ListItemText primary={ingredient}/>
+                            </ListItem>
+                        )}
+                    </List>
                 </Grid>
                 <Grid size={12}>
-                    <Typography variant="h5">Instruction</Typography>
-                    <Typography variant="p" component="p">
-                        Place the raisins and prunes into a small bowl and pour over enough water to cover.
-                        Add lemon juice and let soak for at least 1 hour.
-                        Drain.
-                        Roughly chop the prunes.
-                        Meanwhile, heat the butter in a large pan, add the onion, and cook for 5 minutes.
-                        Add cubed lamb, ground lamb, and crushed garlic cloves.
-                        Fry for 5 minutes, stirring constantly until browned.
-                        Pour 2/3 cup (150 milliliters) of stock into the pan.
-                        Bring to a boil, then lower the heat, cover, and simmer for 1 hour, or until the lamb is tender.
-                        Add the remaining stock and bring to a boil.
-                        Add rinsed long-grain white rice and a large pinch of saffron.
-                        Stir, then cover, and simmer for 15 minutes, or until the rice is tender.
-                        Add the drained raisins, drained chopped prunes, and salt and pepper to taste.
-                        Heat through for a few minutes, then turn out onto a warmed serving dish and garnish with sprigs
-                        of flat-leaf parsley.
-                    </Typography>
+                    <Typography variant="h5" sx={{mb: 2}}>Instruction</Typography>
+                    <Typography component="div" sx={{maxWidth: '75%', whiteSpace: 'normal'}} >{currentRecipe.strInstructions}</Typography>
                 </Grid>
             </Grid>
+        )
+    }
+
+    return (
+        <BasePageLayout>
+            {
+                currentRecipe ? showPageContent() : <CircularProgress/>
+            }
         </BasePageLayout>
     )
 }
