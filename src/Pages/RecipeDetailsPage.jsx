@@ -5,8 +5,9 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 import BasePageLayout from "../components/BasePageLayout.jsx";
 import Typography from "@mui/material/Typography";
-import TheMealDBClient from "../Clients/TheMeanDBClient.js";
+import TheMealDBClient from "../Clients/TheMealDBClient.js";
 import List from '@mui/material/List';
+
 
 const RecipeDetailsPage = () => {
     const [currentRecipe, setCurrentRecipe] = useState(undefined)
@@ -95,6 +96,7 @@ const RecipeDetailsPage = () => {
                 currentRecipe ? showPageContent() : <CircularProgress/>
             }
         </BasePageLayout>
+
     )
 }
 
