@@ -98,7 +98,7 @@ const RecipeDetailsPage = () => {
                     <Typography variant="h5" sx={{mb: 2}}>Instruction</Typography>
                     <Typography component="div" sx={{maxWidth: '75%', whiteSpace: 'normal'}}>
                         <ul>
-                            {parseSentences(currentRecipe.strInstructions).map(sentence => <li>{sentence}</li>)}
+                            {parseSentences(currentRecipe.strInstructions).map((sentence, index) => <li key={index}>{sentence}</li>)}
                         </ul>
                     </Typography>
                 </Grid>
