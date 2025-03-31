@@ -15,7 +15,7 @@ const LoginForm = () => {
     //const {currentUser, handleUpdateUser} = useContext(UserContext);
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (userPassword === "ingrid" && userEmail === "ingrid@gmail.com") {
+        if (userPassword === "user" && userEmail === "user@gmail.com") {
             setSubmitResult("Successful login.");
             handleUpdateUser({email: userEmail}); // context function
         } else {
