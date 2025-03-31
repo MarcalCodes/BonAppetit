@@ -1,5 +1,5 @@
 
-const TheMeanDBClient = {
+const TheMealDBClient = {
 
     /**
      * Will return an Array of recipes
@@ -23,4 +23,4 @@ const TheMeanDBClient = {
 
 }
 
-export default TheMeanDBClient
+export default TheMealDBClient
