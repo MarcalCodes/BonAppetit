@@ -9,6 +9,20 @@ import TheMealDBClient from "../Clients/TheMealDBClient.js";
 import List from '@mui/material/List';
 
 
+/**
+ * Parses a text to an Array of sentences
+ *
+ * Comes from:
+ * - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Segmenter
+ * - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator
+ */
+const parseSentences = (text) => {
+    const segmenter = new Intl.Segmenter("en", {granularity: "sentence"});
+    const iterator = segmenter.segment(text)[Symbol.iterator]().map(v => v.segment);
+    return [...iterator]
+}
+
+
 const RecipeDetailsPage = () => {
     const [currentRecipe, setCurrentRecipe] = useState(undefined)
 
@@ -63,18 +77,18 @@ const RecipeDetailsPage = () => {
                 </Grid>
                 <Grid size={12}>
                     <Typography
-                        variant="h5">Ingredients</Typography> {/* TODO: Put that alongside the ingredient list  */}
+                        variant="h5">Ingredients</Typography>
                 </Grid>
                 <Grid container size={12}>
                     <List
                         dense={true}
                         // CSS comes from https://stackoverflow.com/a/69369691/29476271
                         sx={{
-                        display: "flex",
-                        flexFlow: "column wrap",
-                        height: 300, // set the height limit to your liking
-                        width: '50%',
-                    }}>
+                            display: "flex",
+                            flexFlow: "column wrap",
+                            height: 300, // set the height limit to your liking
+                            width: '50%',
+                        }}>
                         {ingredients().map(ingredient =>
                             <ListItem>
                                 <ListItemText primary={ingredient}/>
@@ -84,7 +98,11 @@ const RecipeDetailsPage = () => {
                 </Grid>
                 <Grid size={12}>
                     <Typography variant="h5" sx={{mb: 2}}>Instruction</Typography>
-                    <Typography component="div" sx={{maxWidth: '75%', whiteSpace: 'normal'}} >{currentRecipe.strInstructions}</Typography>
+                    <Typography component="div" sx={{maxWidth: '75%', whiteSpace: 'normal'}}>
+                        <ul>
+                            {parseSentences(currentRecipe.strInstructions).map(sentence => <li>{sentence}</li>)}
+                        </ul>
+                    </Typography>
                 </Grid>
             </Grid>
         )
