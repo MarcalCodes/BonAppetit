@@ -3,7 +3,7 @@ import {CircularProgress, Grid, ListItem, ListItemText} from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
 import * as React from "react";
 import {useEffect, useState} from "react";
-import BasePageLayout from "../BasePageLayout.jsx";
+import BasePageLayout from "../components/BasePageLayout.jsx";
 import Typography from "@mui/material/Typography";
 import TheMealDBClient from "../Clients/TheMeanDBClient.js";
 import List from '@mui/material/List';

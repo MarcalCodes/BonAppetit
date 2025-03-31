@@ -1,6 +1,6 @@
 import RecipeCard from "../components/RecipeCard.jsx";
 import {Box, FormGroup, Grid, TextField} from "@mui/material";
-import BasePageLayout from "../BasePageLayout.jsx";
+import BasePageLayout from "../components/BasePageLayout.jsx";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import {useState} from "react";

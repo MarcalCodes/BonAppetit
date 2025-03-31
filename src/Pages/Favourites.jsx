@@ -1,4 +1,4 @@
-import BasePageLayout from "../BasePageLayout.jsx";
+import BasePageLayout from "../components/BasePageLayout.jsx";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import {Grid} from "@mui/material";
