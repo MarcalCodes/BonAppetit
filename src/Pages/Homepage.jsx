@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import TheMealDBClient from "../Clients/TheMealDBClient.js";
 
 
-const Homepage = ({recipes, setRecipes}) => {
+const Homepage = ({recipes, setRecipes, isFavourite, addFavourite, removeFavourite}) => {
 
     const handleFindRecipeByName = async (e) => {
         e.preventDefault();
@@ -41,12 +41,11 @@ const Homepage = ({recipes, setRecipes}) => {
                                 <Grid key={index}>
                                     <RecipeCard
                                         key={index}
-                                        id={recipe.idMeal}
-                                        name={recipe.strMeal}
-                                        image={recipe.strMealThumb}
-                                        category={recipe.strCategory}
-                                        area={recipe.strArea}
-                                        isFavourite={false}/>
+                                        recipe={recipe}
+                                        isFavourite={isFavourite(recipe)}
+                                        addFavourite={addFavourite}
+                                        removeFavourite={removeFavourite}
+                                    />
                                 </Grid>
                             )
                 }

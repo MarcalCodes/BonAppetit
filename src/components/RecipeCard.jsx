@@ -14,7 +14,7 @@ import SimpleModal from "./SimpleModal.jsx";
 import {useState} from "react";
 import LoginForm from "./LoginForm.jsx";
 
-const RecipeCard = ({id, name, image, category, area, isFavourite}) => {
+const RecipeCard = ({recipe, isFavourite, addFavourite, removeFavourite}) => {
     const navigate = useNavigate()
     const {currentUser} = useUserContext()
     const [favourite, setFavourite] = useState(isFavourite)
@@ -28,7 +28,13 @@ const RecipeCard = ({id, name, image, category, area, isFavourite}) => {
         if (!currentUser) {
             showLoginPopup()
         } else {
-            setFavourite(!favourite)
+            const isFavourite = !favourite
+            setFavourite(isFavourite)
+            if (isFavourite) {
+                addFavourite(recipe)
+            } else {
+                removeFavourite(recipe)
+            }
         }
     }
 
@@ -42,20 +48,20 @@ const RecipeCard = ({id, name, image, category, area, isFavourite}) => {
                     component="img"
                     alt="green iguana"
                     height="280"
-                    image={image}
+                    image={recipe.strMealThumb}
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        {name}
+                        {recipe.strMeal}
                     </Typography>
-                    <Chip label={category} sx={{mr: 0.5}}/>
-                    <Chip label={area} sx={{mr: 0.5}}/>
+                    <Chip label={recipe.strCategory} sx={{mr: 0.5}}/>
+                    <Chip label={recipe.strArea} sx={{mr: 0.5}}/>
                 </CardContent>
                 <CardActions>
                     <Button size="small" onClick={handeFavouriteClick}>
                         {favourite ? <FavoriteIcon/> : <FavoriteBorderIcon/>}
                     </Button>
-                    <Button size="small" onClick={() => navigate(`/recipe/${id}`)}>Recipe</Button>
+                    <Button size="small" onClick={() => navigate(`/recipe/${recipe.idMeal}`)}>Recipe</Button>
                 </CardActions>
             </Card>
         </>
