@@ -84,7 +84,7 @@ const RecipeDetailsPage = () => {
                         sx={{
                             display: "flex",
                             flexFlow: "column wrap",
-                            height: 300, // set the height limit to your liking
+                            height: 350, // set the height limit to your liking
                             width: '50%',
                         }}>
                         {ingredients().map(ingredient =>
