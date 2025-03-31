@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 import {useState} from "react";
 import Button from "@mui/material/Button";
-import TheMealDBClient from "../Clients/TheMealDBClient.js";
+import {searchRecipesByName} from "../api/TheMealDbApi.js";
 
 
 const Homepage = ({recipes, setRecipes, isFavourite, addFavourite, removeFavourite}) => {
@@ -13,7 +13,7 @@ const Homepage = ({recipes, setRecipes, isFavourite, addFavourite, removeFavouri
     const handleFindRecipeByName = async (e) => {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(e.target))
-        const foundRecipes = await TheMealDBClient.searchRecipesByName(data.userFilter)
+        const foundRecipes = await searchRecipesByName(data.userFilter)
         setRecipes(foundRecipes)
     }
 

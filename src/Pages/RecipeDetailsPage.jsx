@@ -5,7 +5,7 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 import BasePageLayout from "../components/BasePageLayout.jsx";
 import Typography from "@mui/material/Typography";
-import TheMealDBClient from "../Clients/TheMealDBClient.js";
+import {findRecipeById} from "../api/TheMealDbApi.js";
 import List from '@mui/material/List';
 
 
@@ -30,9 +30,7 @@ const RecipeDetailsPage = () => {
     const recipeId = params.recipeId
 
     useEffect(() => {
-        TheMealDBClient
-            .findRecipeById(recipeId)
-            .then(recipe => setCurrentRecipe(recipe))
+        findRecipeById(recipeId).then(recipe => setCurrentRecipe(recipe))
     }, [recipeId])
 
     const ingredients = () => {
