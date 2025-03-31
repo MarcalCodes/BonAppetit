@@ -15,11 +15,11 @@ const LoginForm = () => {
     //const {currentUser, handleUpdateUser} = useContext(UserContext);
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (userPassword === "pass" && userEmail === "ingrid") {
+        if (userPassword === "ingrid" && userEmail === "ingrid@gmail.com") {
             setSubmitResult("Successful login.");
             handleUpdateUser({email: userEmail}); // context function
         } else {
-            setSubmitResult("User not found");
+            setSubmitResult("Invalid login/password");
         }
     };
 
