@@ -8,7 +8,7 @@ const Footer = () => {
             sx={{
                 width: '100%', // Make sure it stretches across
                 minHeight: '60px',
-                backgroundColor: 'white',
+                backgroundColor: '#ADD8E6',
                 color: 'black',
                 display: 'flex',
                 justifyContent: 'center',
